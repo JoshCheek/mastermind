@@ -34,6 +34,10 @@ RSpec.describe Mastermind::CLI::Interact do
     assert_prints_something :print_farewell
   end
 
+  it 'prints an invalid message' do
+    assert_prints_something :print_invalid_message
+  end
+
   describe "prompt_input" do
     it "prompts the input and returns the user's selection" do
       returned = assert_prints_something :prompt_input, "a\nb\nc\n"

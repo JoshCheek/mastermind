@@ -46,16 +46,26 @@ RSpec.describe Mastermind::CLI do
 
     it "doesn't play the game"
 
-    it "doesn't print instructions"
+    it "doesn't print instructions" do
+      after_running("q").refute_told_to :print_instructions
+    end
+
     it "doesn't print an invalid message"
     it "doesn't prompt again"
   end
 
   context "when my input is invalid" do
-    it "prints an invalid message"
+    let(:invalid_message) { "sdlkfj" }
+
+    it "prints an invalid message" do
+      after_running(invalid_message).assert_told_to :print_invalid_message
+    end
+
     it "doesn't print a farewell message"
     it "doesn't play the game"
-    it "doesn't print instructions"
+    it "doesn't print instructions" do
+      after_running(invalid_message).refute_told_to :print_instructions
+    end
     it "prompts again"
   end
 end

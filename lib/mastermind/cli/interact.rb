@@ -29,6 +29,10 @@ class Mastermind
         stdout.puts "Thanks for playing, come again!"
       end
 
+      def print_invalid_message
+        stdout.puts "Your message is not valid"
+      end
+
       private
 
       attr_accessor :stdin, :stdout

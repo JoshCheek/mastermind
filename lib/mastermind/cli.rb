@@ -6,6 +6,8 @@ class Mastermind
       input = interact.prompt_input
       if input == "i"
         interact.print_instructions
+      else
+        interact.print_invalid_message
       end
 
       # loop {
