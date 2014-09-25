@@ -1,9 +1,7 @@
+require 'mastermind/cli/play_game'
+
 class Mastermind
   module CLI
-    class PlayGame
-
-    end
-
     def self.call(interact)
       interact.print_intro
       interact.print_options
