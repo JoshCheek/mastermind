@@ -21,6 +21,10 @@ class Mastermind
         input && input.chomp
       end
 
+      def print_instructions
+        stdout.puts "Here is how you play mastermind:.... FIXME :D"
+      end
+
       private
 
       attr_accessor :stdin, :stdout

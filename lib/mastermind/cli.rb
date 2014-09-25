@@ -4,6 +4,7 @@ class Mastermind
       interact.print_intro
       interact.print_options
       input = interact.prompt_input
+      interact.print_instructions
       # print an intro
       # print the options
       # prompt and get your option

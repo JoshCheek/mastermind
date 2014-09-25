@@ -26,6 +26,10 @@ RSpec.describe Mastermind::CLI::Interact do
     assert_prints_something :print_options
   end
 
+  it 'prints the instructions' do
+    assert_prints_something :print_instructions
+  end
+
   describe "prompt_input" do
     it "prompts the input and returns the user's selection" do
       returned = assert_prints_something :prompt_input, "a\nb\nc\n"
