@@ -2,6 +2,9 @@ class Mastermind
   def initialize(secret, valid_colors)
   end
 
+  def num_turns
+  end
+
 
   module CLI
     module PlayGame
@@ -9,7 +12,7 @@ class Mastermind
         game  = Mastermind.new(secret, valid_colors)
 
         loop do
-          guess = interact.prompt_guess
+          guess = interact.prompt_guess(game)
           unless guess
             interact.print_cant_continue
             break

@@ -19,7 +19,7 @@ RSpec.describe Mastermind::CLI::PlayGame do
 
     # TODO: needs to know what turn I'm on
     it 'does not continue prompting for a guess' do
-      after_running.assert_told_to :prompt_guess, 1
+      after_running.assert_told_to :prompt_guess, num_times: 1
     end
 
     it 'exits the game with a cant continue message' do
@@ -37,7 +37,7 @@ RSpec.describe Mastermind::CLI::PlayGame do
     end
 
     it 'continues prompting for input' do
-      after_running.assert_told_to :prompt_guess, 2
+      after_running.assert_told_to :prompt_guess, num_times: 2
     end
 
     it 'does not increment my turn'
@@ -52,10 +52,16 @@ RSpec.describe Mastermind::CLI::PlayGame do
     end
 
     it 'continues prompting for input' do
-      after_running.assert_told_to :prompt_guess, 2
+      after_running.assert_told_to :prompt_guess, num_times: 2
     end
 
-    it 'increments my turn'
+    it 'increments my turn' do
+      pending 'mastermind needs to actually work!'
+      after_running.assert_told_to :prompt_guess, num_times: 2
+      after_running.assert_told_to :prompt_guess, with: -> game { game.num_turns == 1 }
+      after_running.assert_told_to :prompt_guess, with: -> game { game.num_turns == 2 }
+    end
+
     it 'prints last guess stats'
     it 'does not print invalid input message'
     it 'does not print the win message'
@@ -67,7 +73,7 @@ RSpec.describe Mastermind::CLI::PlayGame do
     end
 
     it 'does not continue prompting for input' do
-      after_running.assert_told_to :prompt_guess, 2
+      after_running.assert_told_to :prompt_guess, num_times: 2
     end
 
     it 'does not increment my turn'

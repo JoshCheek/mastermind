@@ -3,8 +3,8 @@ class MockInteract
 
   def self.define_interface_method(method_name, &additional_body)
     INTERFACE_METHODS << method_name
-    define_method(method_name) do
-      messages << method_name
+    define_method(method_name) do |*args|
+      messages << [method_name, args]
       additional_body && instance_eval(&additional_body)
     end
   end
@@ -25,17 +25,21 @@ class MockInteract
     self.stdin_results = stdin_results
   end
 
+  # TODO: rename messages to invocations
   def refute_told_to(message)
-    return unless messages.include? message
+    return unless messages.map(&:first).include? message
     raise "Was told to #{message.inspect}, but should not have been!"
   end
 
-  def assert_told_to(expected_message, num_times=nil)
+  def assert_told_to(expected_message, options={})
+    num_times = options[:num_times]
+    with      = options[:with] || -> * { true }
     if !num_times
-      return if messages.include? expected_message
+      return if messages.any? { |message, args| message == expected_message && with.call(*args) }
       raise "Was not told to #{expected_message.inspect}, was only told to #{messages.inspect}"
     else
-      actual_times = messages.count { |message| message == expected_message }
+      # NOTE: does not respect :with
+      actual_times = messages.count { |message, args| message == expected_message }
       return if actual_times == num_times
       raise "Expected to be be told to #{expected_message.inspect} #{num_times} times, but got #{actual_times} times"
     end
