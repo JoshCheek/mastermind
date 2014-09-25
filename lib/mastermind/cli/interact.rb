@@ -15,6 +15,11 @@ class Mastermind
         stdout.puts '       "q" to quit'
       end
 
+      def prompt_input
+        stdout.print '> '
+        stdin.gets.chomp
+      end
+
       private
 
       attr_accessor :stdin, :stdout

@@ -9,19 +9,25 @@ RSpec.describe Mastermind::CLI::Interact do
     end
   end
 
-  it 'prints the intro' do
-    stdin = StringIO.new
-    stdout = StringIO.new
-    interact = Mastermind::CLI::Interact.new(stdin, stdout)
-    interact.print_intro
+  def assert_prints_something(message, stdin="")
+    stdin        = StringIO.new stdin
+    stdout       = StringIO.new
+    interact     = Mastermind::CLI::Interact.new(stdin, stdout)
+    return_value = interact.__send__ message
     expect(stdout.string).to_not be_empty
+    return_value
+  end
+
+  it 'prints the intro' do
+    assert_prints_something :print_intro
   end
 
   it 'prints the options' do
-    stdin = StringIO.new
-    stdout = StringIO.new
-    interact = Mastermind::CLI::Interact.new(stdin, stdout)
-    interact.print_options
-    expect(stdout.string).to_not be_empty
+    assert_prints_something :print_options
+  end
+
+  it "prompts the input and returns the user's selection" do
+    returned = assert_prints_something :prompt_input, "a\nb\nc\n"
+    expect(returned).to eq "a"
   end
 end

@@ -13,7 +13,11 @@ RSpec.describe Mastermind::CLI do
     interact.assert_told_to :print_options
   end
 
-  it 'prompts and gets input'
+  it 'prompts and gets input' do
+    interact = MockInteract.new
+    Mastermind::CLI.call interact
+    interact.assert_told_to :prompt_input
+  end
 
   context 'when I choose to play the game' do
     it 'plays the game'
