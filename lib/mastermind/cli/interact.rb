@@ -17,7 +17,8 @@ class Mastermind
 
       def prompt_input
         stdout.print '> '
-        stdin.gets.chomp
+        input = stdin.gets
+        input && input.chomp
       end
 
       private

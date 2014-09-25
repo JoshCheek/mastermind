@@ -26,8 +26,15 @@ RSpec.describe Mastermind::CLI::Interact do
     assert_prints_something :print_options
   end
 
-  it "prompts the input and returns the user's selection" do
-    returned = assert_prints_something :prompt_input, "a\nb\nc\n"
-    expect(returned).to eq "a"
+  describe "prompt_input" do
+    it "prompts the input and returns the user's selection" do
+      returned = assert_prints_something :prompt_input, "a\nb\nc\n"
+      expect(returned).to eq "a"
+    end
+
+    it "returns nil when the stream is empty" do
+      returned = assert_prints_something :prompt_input, ""
+      expect(returned).to eq nil
+    end
   end
 end
