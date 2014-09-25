@@ -1,5 +1,9 @@
 class Mastermind
   module CLI
+    class PlayGame
+
+    end
+
     def self.call(interact)
       interact.print_intro
       interact.print_options
@@ -10,6 +14,8 @@ class Mastermind
           break
         elsif input == "i"
           interact.print_instructions
+        elsif input == "p"
+          PlayGame.call(interact)
         else
           interact.print_invalid_message
         end
