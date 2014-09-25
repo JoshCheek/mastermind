@@ -22,7 +22,6 @@ RSpec.describe Mastermind::CLI do
   context 'when I choose to play the game' do
     it 'plays the game'
     it "doesn't print instructions"
-    it "doesn't quit"
     xit "doesn't print an invalid message" do
       after_running("p").refute_told_to :print_invalid_message
     end
@@ -37,7 +36,6 @@ RSpec.describe Mastermind::CLI do
     end
 
     it "doesn't play the game"
-    it "doesn't quit"
 
     it "doesn't print an invalid message" do
       after_running("i").refute_told_to :print_invalid_message
@@ -71,11 +69,12 @@ RSpec.describe Mastermind::CLI do
       after_running(invalid_message).assert_told_to :print_invalid_message
     end
 
-    it "doesn't print a farewell message"
     it "doesn't play the game"
+
     it "doesn't print instructions" do
       after_running(invalid_message).refute_told_to :print_instructions
     end
+
     it "prompts again"
   end
 end
