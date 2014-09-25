@@ -22,8 +22,11 @@ RSpec.describe Mastermind::CLI::PlayGame do
       after_running.assert_told_to :prompt_guess, 1
     end
 
-    it 'exits the game with a cant continue message'
-    it 'does not prin last guess stats'
+    it 'exits the game with a cant continue message' do
+      after_running.assert_told_to :print_cant_continue
+    end
+
+    it 'does not print last guess stats'
     it 'does not print invalid input message'
     it 'does not print the win message'
   end
@@ -38,7 +41,6 @@ RSpec.describe Mastermind::CLI::PlayGame do
     end
 
     it 'does not increment my turn'
-    it 'does not say it cant continue'
     it 'does not prin last guess stats'
     it 'does not print invalid input message'
     it 'does not print the win message'
@@ -54,7 +56,6 @@ RSpec.describe Mastermind::CLI::PlayGame do
     end
 
     it 'increments my turn'
-    it 'does not say it cant continue'
     it 'prints last guess stats'
     it 'does not print invalid input message'
     it 'does not print the win message'
@@ -70,7 +71,6 @@ RSpec.describe Mastermind::CLI::PlayGame do
     end
 
     it 'does not increment my turn'
-    it 'does not say it cant continue'
     it 'does not print last guess stats'
     it 'does not print invalid input message'
     it 'does not print the win message'

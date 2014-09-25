@@ -10,7 +10,10 @@ class Mastermind
 
         loop do
           guess = interact.prompt_guess
-          break unless guess
+          unless guess
+            interact.print_cant_continue
+            break
+          end
           # if !game.valid_guess?(guess)
           # end
         end
