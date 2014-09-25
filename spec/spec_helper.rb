@@ -18,6 +18,11 @@ class MockInteract
     self.stdin_results = stdin_results
   end
 
+  def refute_told_to(message)
+    return unless messages.include? message
+    raise "Was told to #{message.inspect}, but should not have been!"
+  end
+
   def assert_told_to(expected_message)
     return if messages.include? expected_message
     raise "Was not told to #{expected_message.inspect}, was only told to #{messages.inspect}"

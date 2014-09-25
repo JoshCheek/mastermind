@@ -31,7 +31,7 @@ RSpec.describe Mastermind::CLI do
     it "prints instructions" do
       interact = MockInteract.new("")
       Mastermind::CLI.call interact
-      interact.assert_told_to :print_instructions
+      interact.refute_told_to :print_instructions
 
       interact = MockInteract.new("i")
       Mastermind::CLI.call interact
