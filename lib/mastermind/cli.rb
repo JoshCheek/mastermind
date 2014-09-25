@@ -4,7 +4,8 @@ class Mastermind
       interact.print_intro
       interact.print_options
       input = interact.prompt_input
-      if input == "i"
+      if input == "q"
+      elsif input == "i"
         interact.print_instructions
       else
         interact.print_invalid_message
