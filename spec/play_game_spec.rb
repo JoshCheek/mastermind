@@ -19,6 +19,7 @@ RSpec.describe Mastermind::CLI::PlayGame do
 
     it 'does not continue prompting for a guess' do
       after_running.assert_told_to :prompt_guess, num_times: 1
+      after_running.assert_told_to :prompt_guess, with: -> game { game.num_turns == 1 }
     end
 
     it 'exits the game with a cant continue message' do
@@ -56,7 +57,6 @@ RSpec.describe Mastermind::CLI::PlayGame do
 
     it 'increments my turn' do
       after_running.assert_told_to :prompt_guess, num_times: 2
-      after_running.assert_told_to :prompt_guess, with: -> game { game.num_turns == 1 }
       after_running.assert_told_to :prompt_guess, with: -> game { game.num_turns == 2 }
     end
 

@@ -12,6 +12,7 @@ class Mastermind
             interact.print_cant_continue
             break
           end
+          game.guess(guess)
           # if !game.valid_guess?(guess)
           # end
         end
