@@ -7,15 +7,13 @@ class Mastermind
       if input == "i"
         interact.print_instructions
       end
-      # print an intro
-      # print the options
-      # prompt and get your option
+
       # loop {
       #   "p" -> play game
-      #   "i" -> print mastermind instructions
       #   "q" -> quit
       #   invalid input -> tell you to try again
       # }
+      interact.print_farewell
     end
   end
 end

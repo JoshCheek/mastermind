@@ -44,8 +44,13 @@ RSpec.describe Mastermind::CLI do
     it "prompts again"
   end
 
-  context "when I choose to see the instructions" do
-    it "prints a farewell message"
+  context "when I choose to quit" do
+    it "prints a farewell message" do
+      interact = MockInteract.new("q")
+      Mastermind::CLI.call interact
+      interact.assert_told_to :print_farewell
+    end
+
     it "doesn't play the game"
     it "doesn't print instructions"
     it "doesn't print an invalid message"

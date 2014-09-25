@@ -11,6 +11,7 @@ class MockInteract
 
   define_interface_method(:print_intro)
   define_interface_method(:print_options)
+  define_interface_method(:print_farewell)
   define_interface_method(:print_instructions)
   define_interface_method(:prompt_input) { stdin_results.shift }
 

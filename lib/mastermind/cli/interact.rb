@@ -25,6 +25,10 @@ class Mastermind
         stdout.puts "Here is how you play mastermind:.... FIXME :D"
       end
 
+      def print_farewell
+        stdout.puts "Thanks for playing, come again!"
+      end
+
       private
 
       attr_accessor :stdin, :stdout
