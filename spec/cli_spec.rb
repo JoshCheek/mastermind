@@ -20,7 +20,7 @@ RSpec.describe Mastermind::CLI do
   end
 
   it 'quits when there is no more input' do
-    after_running(nil).assert_told_to :prompt_input, 1
+    after_running(nil).assert_told_to :prompt_input, num_times: 1
     after_running(nil).assert_told_to :print_farewell
   end
 
@@ -44,7 +44,7 @@ RSpec.describe Mastermind::CLI do
     end
 
     it "prompts again" do
-      after_running(message).assert_told_to :prompt_input, 2
+      after_running(message).assert_told_to :prompt_input, num_times: 2
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe Mastermind::CLI do
     end
 
     it "prompts again" do
-      after_running(message).assert_told_to :prompt_input, 2
+      after_running(message).assert_told_to :prompt_input, num_times: 2
     end
   end
 
@@ -91,7 +91,7 @@ RSpec.describe Mastermind::CLI do
     end
 
     it "doesn't prompt again" do
-      after_running(message).assert_told_to :prompt_input, 1
+      after_running(message).assert_told_to :prompt_input, num_times: 1
     end
   end
 
@@ -112,7 +112,7 @@ RSpec.describe Mastermind::CLI do
     end
 
     it "prompts again" do
-      after_running(message).assert_told_to :prompt_input, 2
+      after_running(message).assert_told_to :prompt_input, num_times: 2
     end
   end
 end

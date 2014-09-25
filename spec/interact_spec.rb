@@ -9,11 +9,11 @@ RSpec.describe Mastermind::CLI::Interact do
     end
   end
 
-  def assert_prints_something(message, stdin="")
-    stdin        = StringIO.new stdin
+  def assert_prints_something(message, options={})
+    stdin        = StringIO.new options.fetch(:stdin, "")
     stdout       = StringIO.new
     interact     = Mastermind::CLI::Interact.new(stdin, stdout)
-    return_value = interact.__send__ message
+    return_value = interact.__send__ message, *options.fetch(:args, [])
     expect(stdout.string).to_not be_empty
     return_value
   end
@@ -40,13 +40,37 @@ RSpec.describe Mastermind::CLI::Interact do
 
   describe "prompt_input" do
     it "prompts the input and returns the user's selection" do
-      returned = assert_prints_something :prompt_input, "a\nb\nc\n"
+      returned = assert_prints_something :prompt_input, stdin: "a\nb\nc\n"
       expect(returned).to eq "a"
     end
 
     it "returns nil when the stream is empty" do
-      returned = assert_prints_something :prompt_input, ""
+      returned = assert_prints_something :prompt_input, stdin: ""
       expect(returned).to eq nil
+    end
+  end
+
+
+
+  context 'PlayGame methods' do
+    it 'prints a cant continue message' do
+      assert_prints_something :print_cant_continue
+    end
+
+    describe "prompt_guess" do
+      let(:mock_game) { Object.new }
+
+      it "prompts the input and returns the user's selection" do
+        returned = assert_prints_something :prompt_guess, stdin: "a\nb\nc\n", args: [mock_game]
+        expect(returned).to eq "a"
+      end
+
+      it "returns nil when the stream is empty" do
+        returned = assert_prints_something :prompt_guess, stdin: "", args: [mock_game]
+        expect(returned).to eq nil
+      end
+
+      # should take a game
     end
   end
 end

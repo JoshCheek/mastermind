@@ -5,6 +5,7 @@ class Mastermind
         self.stdin, self.stdout = stdin, stdout
       end
 
+      # for CLI
       def print_intro
         stdout.puts "Welcome to Mastermind!"
       end
@@ -31,6 +32,17 @@ class Mastermind
 
       def print_invalid_message
         stdout.puts "Your message is not valid"
+      end
+
+      # for PlayGame
+      def print_cant_continue
+        stdout.puts "Can't continue (no more input)"
+      end
+
+      def prompt_guess(game)
+        stdout.puts "Enter your guess:"
+        input = stdin.gets
+        input && input.chomp
       end
 
       private
