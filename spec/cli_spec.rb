@@ -19,6 +19,11 @@ RSpec.describe Mastermind::CLI do
     after_running.assert_told_to :prompt_input
   end
 
+  it 'quits when there is no more input' do
+    after_running(nil).assert_told_to :prompt_input, 1
+    after_running(nil).assert_told_to :print_farewell
+  end
+
   context 'when I choose to play the game' do
     it 'plays the game'
     it "doesn't print instructions"
@@ -41,7 +46,9 @@ RSpec.describe Mastermind::CLI do
       after_running("i").refute_told_to :print_invalid_message
     end
 
-    it "prompts again"
+    it "prompts again" do
+      after_running("i").assert_told_to :prompt_input, 2
+    end
   end
 
   context "when I choose to quit" do
@@ -59,7 +66,9 @@ RSpec.describe Mastermind::CLI do
       after_running("q").refute_told_to :print_invalid_message
     end
 
-    it "doesn't prompt again"
+    it "doesn't prompt again" do
+      after_running("q").assert_told_to :prompt_input, 1
+    end
   end
 
   context "when my input is invalid" do
@@ -75,6 +84,8 @@ RSpec.describe Mastermind::CLI do
       after_running(invalid_message).refute_told_to :print_instructions
     end
 
-    it "prompts again"
+    it "prompts again" do
+      after_running(invalid_message).assert_told_to :prompt_input, 2
+    end
   end
 end

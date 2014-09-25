@@ -25,9 +25,15 @@ class MockInteract
     raise "Was told to #{message.inspect}, but should not have been!"
   end
 
-  def assert_told_to(expected_message)
-    return if messages.include? expected_message
-    raise "Was not told to #{expected_message.inspect}, was only told to #{messages.inspect}"
+  def assert_told_to(expected_message, num_times=nil)
+    if !num_times
+      return if messages.include? expected_message
+      raise "Was not told to #{expected_message.inspect}, was only told to #{messages.inspect}"
+    else
+      actual_times = messages.count { |message| message == expected_message }
+      return if actual_times == num_times
+      raise "Expected to be be told to #{expected_message.inspect} #{num_times} times, but got #{actual_times} times"
+    end
   end
 
   private

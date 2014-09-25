@@ -3,12 +3,16 @@ class Mastermind
     def self.call(interact)
       interact.print_intro
       interact.print_options
-      input = interact.prompt_input
-      if input == "q"
-      elsif input == "i"
-        interact.print_instructions
-      else
-        interact.print_invalid_message
+
+      loop do
+        input = interact.prompt_input
+        if input.nil? || input == "q"
+          break
+        elsif input == "i"
+          interact.print_instructions
+        else
+          interact.print_invalid_message
+        end
       end
 
       # loop {
