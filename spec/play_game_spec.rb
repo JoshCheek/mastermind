@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'mastermind/cli/play_game'
 
 RSpec.describe Mastermind::CLI::PlayGame do
@@ -16,6 +17,7 @@ RSpec.describe Mastermind::CLI::PlayGame do
       super input: nil, valid: ['r']
     end
 
+    # TODO: needs to know what turn I'm on
     it 'does not continue prompting for a guess' do
       after_running.assert_told_to :prompt_guess, 1
     end

@@ -1,11 +1,25 @@
 class Mastermind
+  def initialize(secret, valid_colors)
+  end
+
+
   module CLI
     module PlayGame
       def self.call(interact, secret, valid_colors)
+        game  = Mastermind.new(secret, valid_colors)
+
+        loop do
+          guess = interact.prompt_guess
+          break unless guess
+          # if !game.valid_guess?(guess)
+          # end
+        end
+
+
         # create the game
-        # display the turn
-        # guess = prompt for the guess
         # loop
+        #   display the turn
+        #   guess = prompt for the guess
         #   if guess is invalid
         #     print invalid message
         #     do not increment turn
