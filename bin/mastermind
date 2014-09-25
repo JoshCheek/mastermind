@@ -3,6 +3,8 @@
 lib_dir = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib_dir)
 
+require 'mastermind/cli/interact'
+interact = Mastermind::CLI::Interact.new($stdin, $stdout)
+
 require 'mastermind/cli'
-interact = Interact.new($stdin, $stdout)
 Mastermind::CLI.call(interact)
