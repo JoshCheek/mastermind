@@ -1,11 +1,6 @@
+require 'mastermind'
+
 class Mastermind
-  def initialize(secret, valid_colors)
-  end
-
-  def num_turns
-  end
-
-
   module CLI
     module PlayGame
       def self.call(interact, secret, valid_colors)
