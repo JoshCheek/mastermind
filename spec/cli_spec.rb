@@ -1,10 +1,7 @@
 require 'mastermind/cli'
 
 RSpec.describe Mastermind::CLI do
-  class MockInteract
-  end
-
-  xit 'prints an intro' do
+  it 'prints an intro' do
     interact = MockInteract.new
     Mastermind::CLI.call interact
     interact.assert_told_to :print_intro

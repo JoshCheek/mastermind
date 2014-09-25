@@ -1,6 +1,7 @@
 class Mastermind
-  class CLI
+  module CLI
     def self.call(interact)
+      interact.print_intro
       # print an intro
       # print the options
       # prompt and get your option
