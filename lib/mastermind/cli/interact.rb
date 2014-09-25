@@ -9,6 +9,12 @@ class Mastermind
         stdout.puts "Welcome to Mastermind!"
       end
 
+      def print_options
+        stdout.puts 'Enter: "p" to play Mastermind'
+        stdout.puts '       "i" to print mastermind instructions'
+        stdout.puts '       "q" to quit'
+      end
+
       private
 
       attr_accessor :stdin, :stdout

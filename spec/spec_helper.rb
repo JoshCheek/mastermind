@@ -10,6 +10,10 @@ class MockInteract
     messages << :print_intro
   end
 
+  INTERFACE_METHODS << def print_options
+    messages << :print_options
+  end
+
   private
 
   def messages
