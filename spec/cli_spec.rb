@@ -1,22 +1,22 @@
 require 'mastermind/cli'
 
 RSpec.describe Mastermind::CLI do
-  it 'prints an intro' do
-    interact = MockInteract.new
+  def after_running(input="")
+    interact = MockInteract.new(input)
     Mastermind::CLI.call interact
-    interact.assert_told_to :print_intro
+    interact
+  end
+
+  it 'prints an intro' do
+    after_running.assert_told_to :print_intro
   end
 
   it 'prints the options' do
-    interact = MockInteract.new
-    Mastermind::CLI.call interact
-    interact.assert_told_to :print_options
+    after_running.assert_told_to :print_options
   end
 
   it 'prompts and gets input' do
-    interact = MockInteract.new
-    Mastermind::CLI.call interact
-    interact.assert_told_to :prompt_input
+    after_running.assert_told_to :prompt_input
   end
 
   context 'when I choose to play the game' do
@@ -29,13 +29,8 @@ RSpec.describe Mastermind::CLI do
 
   context "when I choose to see the instructions" do
     it "prints instructions" do
-      interact = MockInteract.new("")
-      Mastermind::CLI.call interact
-      interact.refute_told_to :print_instructions
-
-      interact = MockInteract.new("i")
-      Mastermind::CLI.call interact
-      interact.assert_told_to :print_instructions
+      after_running("").refute_told_to :print_instructions
+      after_running("i").assert_told_to :print_instructions
     end
 
     it "doesn't play the game"
@@ -46,12 +41,11 @@ RSpec.describe Mastermind::CLI do
 
   context "when I choose to quit" do
     it "prints a farewell message" do
-      interact = MockInteract.new("q")
-      Mastermind::CLI.call interact
-      interact.assert_told_to :print_farewell
+      after_running("q").assert_told_to :print_farewell
     end
 
     it "doesn't play the game"
+
     it "doesn't print instructions"
     it "doesn't print an invalid message"
     it "doesn't prompt again"
