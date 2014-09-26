@@ -8,12 +8,10 @@ class Mastermind
 
         loop do
           guess = interact.prompt_guess(game)
-          unless guess
+          if !guess
             interact.print_cant_continue
             break
-          end
-
-          if !game.valid_guess?(guess)
+          elsif !game.valid_guess?(guess)
             interact.print_invalid_guess
           else
             game.guess(guess)
