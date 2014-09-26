@@ -7,22 +7,13 @@ class Mastermind
 
     def self.incorrect_position(secret, guess)
       remaining_secret_chars, remaining_guess_chars =
-        [secret.chars, guess.chars]
-          .transpose
-          .reject { |s, g| s == g }
-          .transpose
-      remaining_guess_chars  ||= []
-      remaining_secret_chars ||= []
+        [secret.chars, guess.chars].transpose.reject { |s, g| s == g }.transpose
+      return 0 unless remaining_secret_chars
 
-      num_matched = 0
-      remaining_guess_chars.each { |guess_char|
-        if index = remaining_secret_chars.index(guess_char)
-          num_matched += 1
-          remaining_secret_chars.delete_at index
-        end
+      remaining_guess_chars.count { |guess_char|
+        next unless index = remaining_secret_chars.index(guess_char)
+        remaining_secret_chars.delete_at index
       }
-      num_matched
     end
-
   end
 end
