@@ -47,7 +47,7 @@ class Mastermind
 
       def print_last_guess_stats(secret, guess)
         stdout.puts "Colors in the correct position:   #{Stats.correct_position  secret, guess}"
-        stdout.puts "Colors in the incorrect position: #{Stats.incorect_position secret, guess}"
+        stdout.puts "Colors in the incorrect position: #{Stats.incorrect_position secret, guess}"
       end
 
       private
