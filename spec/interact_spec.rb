@@ -10,10 +10,11 @@ RSpec.describe Mastermind::CLI::Interact do
   end
 
   def assert_prints_something(message, options={})
+    args         = options.fetch(:args, [])
     stdin        = StringIO.new options.fetch(:stdin, "")
     stdout       = StringIO.new
     interact     = Mastermind::CLI::Interact.new(stdin, stdout)
-    return_value = interact.__send__ message, *options.fetch(:args, [])
+    return_value = interact.__send__ message, *args
     expect(stdout.string).to_not be_empty
     return_value
   end
@@ -71,6 +72,14 @@ RSpec.describe Mastermind::CLI::Interact do
       end
 
       # should take a game
+    end
+
+    it 'prints the last guess\'s stats' do
+      stdout   = StringIO.new
+      interact = Mastermind::CLI::Interact.new(nil, stdout)
+      interact.print_last_guess_stats "rrrg", "grry"
+      expect(stdout.string).to match /\bcorrect position:\s*2\b/
+      expect(stdout.string).to match /\bincorrect position:\s*1\b/
     end
   end
 end

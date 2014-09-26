@@ -45,6 +45,11 @@ class Mastermind
         input && input.chomp
       end
 
+      def print_last_guess_stats(secret, guess)
+        stdout.puts "Colors in the correct position:   2" #{Stats.correct_position  secret, guess}"
+        stdout.puts "Colors in the incorrect position: 1" #{Stats.incorect_position secret, guess}"
+      end
+
       private
 
       attr_accessor :stdin, :stdout

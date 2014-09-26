@@ -47,8 +47,10 @@ RSpec.describe Mastermind::CLI::PlayGame do
   end
 
   context 'when my guess is incorrect' do
+    let(:secret) { 'g' }
+    let(:guess)  { 'r' }
     def after_running
-      super secret: "g", input: "r", valid: ['r', 'g']
+      super secret: secret, input: guess, valid: ['r', 'g']
     end
 
     it 'continues prompting for input' do
@@ -60,7 +62,10 @@ RSpec.describe Mastermind::CLI::PlayGame do
       after_running.assert_told_to :prompt_guess, with: -> game { game.num_turns == 2 }
     end
 
-    it 'prints last guess stats'
+    it 'prints last guess stats' do
+      after_running.assert_told_to :print_last_guess_stats, with: -> s, g { s == secret && g == guess }
+    end
+
     it 'does not print invalid input message'
     it 'does not print the win message'
   end
