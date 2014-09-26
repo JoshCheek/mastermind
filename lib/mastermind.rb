@@ -1,4 +1,5 @@
 require 'mastermind/stats'
+require 'mastermind/secret_generator'
 
 class Mastermind
   def initialize(secret, valid_colors)
