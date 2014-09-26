@@ -18,6 +18,7 @@ class MockInteract
   define_interface_method(:prompt_input) { stdin_results.shift }
 
   # for CLI::PlayGame
+  define_interface_method(:print_win_message)
   define_interface_method(:print_invalid_guess)
   define_interface_method(:print_cant_continue)
   define_interface_method(:print_last_guess_stats)

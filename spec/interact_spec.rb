@@ -87,5 +87,19 @@ RSpec.describe Mastermind::CLI::Interact do
     it 'prints that a guess was invalid' do
       assert_prints_something :print_invalid_guess
     end
+
+    it 'prints the win message' do
+      stdout   = StringIO.new
+      interact = Mastermind::CLI::Interact.new(nil, stdout)
+      interact.print_win_message 2
+      expect(stdout.string).to match /\b2\b/
+      expect(stdout.string).to_not match /\b3\b/
+
+      stdout   = StringIO.new
+      interact = Mastermind::CLI::Interact.new(nil, stdout)
+      interact.print_win_message 3
+      expect(stdout.string).to match /\b3\b/
+      expect(stdout.string).to_not match /\b2\b/
+    end
   end
 end

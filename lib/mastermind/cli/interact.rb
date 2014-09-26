@@ -1,3 +1,5 @@
+require 'mastermind/stats'
+
 class Mastermind
   module CLI
     class Interact
@@ -52,6 +54,10 @@ class Mastermind
 
       def print_invalid_guess
         stdout.puts "Invalid input!"
+      end
+
+      def print_win_message(turns)
+        stdout.puts "Correct you won in #{turns} turns!"
       end
 
       private
