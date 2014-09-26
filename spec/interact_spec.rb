@@ -19,35 +19,37 @@ RSpec.describe Mastermind::CLI::Interact do
     return_value
   end
 
-  it 'prints the intro' do
-    assert_prints_something :print_intro
-  end
-
-  it 'prints the options' do
-    assert_prints_something :print_options
-  end
-
-  it 'prints the instructions' do
-    assert_prints_something :print_instructions
-  end
-
-  it 'prints the farewell message' do
-    assert_prints_something :print_farewell
-  end
-
-  it 'prints an invalid message' do
-    assert_prints_something :print_invalid_message
-  end
-
-  describe "prompt_input" do
-    it "prompts the input and returns the user's selection" do
-      returned = assert_prints_something :prompt_input, stdin: "a\nb\nc\n"
-      expect(returned).to eq "a"
+  context 'CLI methods' do
+    it 'prints the intro' do
+      assert_prints_something :print_intro
     end
 
-    it "returns nil when the stream is empty" do
-      returned = assert_prints_something :prompt_input, stdin: ""
-      expect(returned).to eq nil
+    it 'prints the options' do
+      assert_prints_something :print_options
+    end
+
+    it 'prints the instructions' do
+      assert_prints_something :print_instructions
+    end
+
+    it 'prints the farewell message' do
+      assert_prints_something :print_farewell
+    end
+
+    it 'prints an invalid message' do
+      assert_prints_something :print_invalid_message
+    end
+
+    describe "prompt_input" do
+      it "prompts the input and returns the user's selection" do
+        returned = assert_prints_something :prompt_input, stdin: "a\nb\nc\n"
+        expect(returned).to eq "a"
+      end
+
+      it "returns nil when the stream is empty" do
+        returned = assert_prints_something :prompt_input, stdin: ""
+        expect(returned).to eq nil
+      end
     end
   end
 
