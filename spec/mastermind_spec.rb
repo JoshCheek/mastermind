@@ -1,6 +1,11 @@
 require 'mastermind'
 
 RSpec.describe Mastermind do
+  it 'it makes its valid_colors available' do
+    expect(Mastermind.new("rrrr", ['r']).valid_colors).to eq ['r']
+    expect(Mastermind.new("rrrr", ['y']).valid_colors).to eq ['y']
+  end
+
   it 'knows how many turns have been taken' do
     m = Mastermind.new("rrrr", ['r'])
     expect(m.turns_taken).to eq 0

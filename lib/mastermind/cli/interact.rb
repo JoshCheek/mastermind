@@ -42,7 +42,9 @@ class Mastermind
       end
 
       def prompt_guess(game)
-        stdout.puts "Enter your guess:"
+        stdout.puts "You are on turn #{game.turns_taken+1}"
+        stdout.puts "Enter a guess (#{game.valid_colors.map(&:inspect).join(', ')})"
+        stdout.print "> "
         input = stdin.gets
         input && input.chomp
       end

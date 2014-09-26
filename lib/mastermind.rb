@@ -2,6 +2,8 @@ require 'mastermind/stats'
 require 'mastermind/secret_generator'
 
 class Mastermind
+  attr_reader :valid_colors
+
   def initialize(secret, valid_colors)
     self.secret        = secret
     self.guesses       = []
@@ -27,5 +29,6 @@ class Mastermind
 
   private
 
-  attr_accessor :guesses, :secret, :valid_colors
+  attr_accessor :guesses, :secret
+  attr_writer :valid_colors
 end

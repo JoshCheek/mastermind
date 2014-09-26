@@ -61,7 +61,18 @@ RSpec.describe Mastermind::CLI::Interact do
     end
 
     describe "prompt_guess" do
-      let(:mock_game) { Object.new }
+      let(:valid_colors) { ['a', 'b', 'c'] }
+      let(:mock_game)    { Mastermind.new("r", valid_colors) }
+
+      it 'prints the current turn, and the valid inputs' do
+        stdout   = StringIO.new
+        interact = Mastermind::CLI::Interact.new(StringIO.new, stdout)
+        interact.prompt_guess(mock_game)
+        expect(stdout.string).to include '"a"'
+        expect(stdout.string).to include '"b"'
+        expect(stdout.string).to include '"c"'
+        expect(stdout.string).to include "turn 1"
+      end
 
       it "prompts the input and returns the user's selection" do
         returned = assert_prints_something :prompt_guess, stdin: "a\nb\nc\n", args: [mock_game]
@@ -72,8 +83,6 @@ RSpec.describe Mastermind::CLI::Interact do
         returned = assert_prints_something :prompt_guess, stdin: "", args: [mock_game]
         expect(returned).to eq nil
       end
-
-      # should take a game
     end
 
     it 'prints the last guess\'s stats' do

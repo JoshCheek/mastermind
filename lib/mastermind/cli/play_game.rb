@@ -7,7 +7,10 @@ class Mastermind
         game  = Mastermind.new(secret, valid_colors)
 
         loop do
-          guess = interact.prompt_guess(game)
+          guess = interact.prompt_guess(game) # TODO: better message:
+                                              #   You are on turn 1
+                                              #   Enter a guess ("r", "g", "b", "y")
+                                              #   > rrbr
 
           unless guess
             interact.print_cant_continue

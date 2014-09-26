@@ -4,7 +4,10 @@ lib_dir = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib_dir)
 
 require 'mastermind/cli/interact'
-interact = Mastermind::CLI::Interact.new($stdin, $stdout)
+valid_chars = ['y', 'g', 'r', 'b']
+
 
 require 'mastermind/cli'
-Mastermind::CLI.call(interact)
+Mastermind::CLI.call Mastermind::CLI::Interact.new($stdin, $stdout),
+                     Mastermind::SecretGenerator.new(4, valid_chars),
+                     valid_chars
