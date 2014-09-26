@@ -3,12 +3,12 @@ require 'mastermind'
 RSpec.describe Mastermind do
   it 'knows how many turns have been taken' do
     m = Mastermind.new("rrrr", ['r'])
-    expect(m.num_turns).to eq 1
+    expect(m.turns_taken).to eq 0
     m.guess "gggg"
-    expect(m.num_turns).to eq 2
+    expect(m.turns_taken).to eq 1
     m.guess "gggg"
     m.guess "gggg"
-    expect(m.num_turns).to eq 4
+    expect(m.turns_taken).to eq 3
   end
 
   it 'knows if it has been won' do
@@ -19,7 +19,6 @@ RSpec.describe Mastermind do
     m.guess("r")
     expect(m).to be_won
   end
-
 
   context 'valid_guess?' do
     def assert_valid(secret, guess, valid_colors)

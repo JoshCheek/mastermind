@@ -11,8 +11,8 @@ class Mastermind
     guesses << guess
   end
 
-  def num_turns
-    guesses.size.next
+  def turns_taken
+    guesses.size
   end
 
   def valid_guess?(guess)
