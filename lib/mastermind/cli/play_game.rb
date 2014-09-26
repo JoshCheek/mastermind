@@ -13,12 +13,13 @@ class Mastermind
             break
           end
 
-          # incorrect stuffs
-          game.guess(guess)
-          interact.print_last_guess_stats(secret, guess)
+          if !game.valid_guess?(guess)
+            interact.print_invalid_guess
+          else
+            game.guess(guess)
+            interact.print_last_guess_stats(secret, guess)
+          end
 
-          # if !game.valid_guess?(guess)
-          # end
         end
 
 

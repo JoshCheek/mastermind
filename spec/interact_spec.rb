@@ -81,5 +81,9 @@ RSpec.describe Mastermind::CLI::Interact do
       expect(stdout.string).to match /\bcorrect position:\s*2\b/
       expect(stdout.string).to match /\bincorrect position:\s*1\b/
     end
+
+    it 'prints that a guess was invalid' do
+      assert_prints_something :print_invalid_guess
+    end
   end
 end

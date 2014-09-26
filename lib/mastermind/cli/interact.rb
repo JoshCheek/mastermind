@@ -50,6 +50,10 @@ class Mastermind
         stdout.puts "Colors in the incorrect position: #{Stats.incorrect_position secret, guess}"
       end
 
+      def print_invalid_guess
+        stdout.puts "Invalid input!"
+      end
+
       private
 
       attr_accessor :stdin, :stdout

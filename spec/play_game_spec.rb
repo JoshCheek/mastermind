@@ -26,7 +26,10 @@ RSpec.describe Mastermind::CLI::PlayGame do
       after_running.assert_told_to :print_cant_continue
     end
 
-    it 'does not print last guess stats'
+    it 'does not print last guess stats' do
+      after_running.refute_told_to :print_last_guess_stats
+    end
+
     it 'does not print invalid input message'
     it 'does not print the win message'
   end
@@ -36,12 +39,20 @@ RSpec.describe Mastermind::CLI::PlayGame do
       super input: "z", valid: ['r']
     end
 
+    it 'prints that the input was invalid' do
+      after_running.assert_told_to :print_invalid_guess
+    end
+
     it 'continues prompting for input' do
       after_running.assert_told_to :prompt_guess, num_times: 2
     end
 
     it 'does not increment my turn'
-    it 'does not prin last guess stats'
+
+    it 'does not print last guess stats' do
+      after_running.refute_told_to :print_last_guess_stats
+    end
+
     it 'does not print invalid input message'
     it 'does not print the win message'
   end
