@@ -3,9 +3,12 @@ require 'mastermind/cli'
 RSpec.describe Mastermind::CLI do
   def after_running(input="")
     interact = MockInteract.new(input)
-    Mastermind::CLI.call interact
+    Mastermind::CLI.call interact, secret_generator, valid_colors
     interact
   end
+
+  let(:valid_colors)     { ['r'] }
+  let(:secret_generator) { MockSecretGenerator.new }
 
   it 'prints an intro' do
     after_running.assert_told_to :print_intro
@@ -31,7 +34,10 @@ RSpec.describe Mastermind::CLI do
     end
 
     it 'plays the game' do
-      expect(Mastermind::CLI::PlayGame).to receive(:call).with(an_instance_of MockInteract)
+      secret_generator.secret = "overridden secret"
+      expect(Mastermind::CLI::PlayGame)
+        .to receive(:call)
+        .with(an_instance_of(MockInteract), "overridden secret", valid_colors)
       after_running(message)
     end
 

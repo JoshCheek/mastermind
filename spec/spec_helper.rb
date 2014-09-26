@@ -1,3 +1,11 @@
+class MockSecretGenerator
+  attr_accessor :secret
+  def initialize
+    self.secret = 'default secret'
+  end
+  alias call secret
+end
+
 class MockInteract
   INTERFACE_METHODS = []
 
