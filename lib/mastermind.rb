@@ -1,3 +1,5 @@
+require 'mastermind/stats'
+
 class Mastermind
   def initialize(secret, valid_colors)
     self.secret        = secret
