@@ -20,6 +20,10 @@ class Mastermind
       guess.chars.all? { |color| valid_colors.include? color }
   end
 
+  def won?
+    guesses.last == secret
+  end
+
   private
 
   attr_accessor :guesses, :secret, :valid_colors

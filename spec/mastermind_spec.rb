@@ -11,6 +11,15 @@ RSpec.describe Mastermind do
     expect(m.num_turns).to eq 4
   end
 
+  it 'knows if it has been won' do
+    m = Mastermind.new("r", ['r', 'g'])
+    expect(m).to_not be_won
+    m.guess("g")
+    expect(m).to_not be_won
+    m.guess("r")
+    expect(m).to be_won
+  end
+
 
   context 'valid_guess?' do
     def assert_valid(secret, guess, valid_colors)
