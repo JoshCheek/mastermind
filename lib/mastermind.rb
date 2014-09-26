@@ -15,6 +15,11 @@ class Mastermind
     guesses.size.next
   end
 
+  def valid_guess?(guess)
+    guess.length == secret.length &&
+      guess.chars.all? { |color| valid_colors.include? color }
+  end
+
   private
 
   attr_accessor :guesses, :secret, :valid_colors
