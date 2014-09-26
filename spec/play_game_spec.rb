@@ -48,11 +48,9 @@ RSpec.describe Mastermind::CLI::PlayGame do
       after_running.assert_told_to :print_invalid_guess
     end
 
-    it 'continues prompting for input' do
-      after_running.assert_told_to :prompt_guess, num_times: 2
+    it 'continues prompting for input without incrementing the number of turns' do
+      after_running.assert_told_to :prompt_guess, num_times: 2, with: -> game { game.turns_taken == 0 }
     end
-
-    it 'does not increment my turn'
 
     it 'does not print last guess stats' do
       after_running.refute_told_to :print_last_guess_stats
@@ -97,7 +95,7 @@ RSpec.describe Mastermind::CLI::PlayGame do
       super secret: "r", input: "r", valid: ['r', 'g']
     end
 
-    it 'prints the win message' do
+    it 'prints the win message without incrementing my turns' do
       after_running.assert_told_to :print_win_message, with: -> num_guesses { num_guesses == 1 }
     end
 
@@ -105,8 +103,9 @@ RSpec.describe Mastermind::CLI::PlayGame do
       after_running.assert_told_to :prompt_guess, num_times: 1
     end
 
-    it 'does not increment my turn'
-    it 'does not print last guess stats'
+    it 'does not print last guess stats' do
+      after_running.refute_told_to :print_last_guess_stats
+    end
 
     it 'does not print invalid input message' do
       after_running.refute_told_to :print_invalid_guess
